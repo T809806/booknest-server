@@ -4,6 +4,7 @@ import {
   addBook,
   getAllBooks,
   getSingleBook,
+  getMyBooks,
   deleteBook,
 } from "../controllers/book.controller";
 
@@ -13,6 +14,7 @@ const router = Router();
 
 // Public Routes
 router.get("/", getAllBooks);
+router.get("/my-books", verifyToken, getMyBooks);
 router.get("/:id", getSingleBook);
 
 // Protected Routes

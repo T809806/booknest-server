@@ -183,6 +183,36 @@ export const getSingleBook = async (
   }
 };
 
+export const getMyBooks = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const email = req.query.email as string;
+
+    const books = await booksCollection
+      .find({
+        userEmail: email,
+      })
+      .sort({
+        createdAt: -1,
+      })
+      .toArray();
+
+    return res.status(200).json({
+      success: true,
+      books,
+    });
+  } catch (error) {
+    console.error("Get My Books Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
 // =======================
 // Delete Book
 // =======================
