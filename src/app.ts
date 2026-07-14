@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://book-nest-client-nu.vercel.app/",
+      "https://book-nest-client-nu.vercel.app",
     ],
     credentials: true,
   })
