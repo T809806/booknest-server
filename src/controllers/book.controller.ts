@@ -4,9 +4,7 @@ import { ObjectId } from "mongodb";
 import { booksCollection } from "../config/db";
 import { Book } from "../types/book.types";
 
-// =======================
-// Add Book
-// =======================
+
 export const addBook = async (
   req: Request,
   res: Response
@@ -34,9 +32,7 @@ export const addBook = async (
   }
 };
 
-// =======================
-// Get All Books
-// =======================
+
 export const getAllBooks = async (
   req: Request,
   res: Response
@@ -58,7 +54,7 @@ export const getAllBooks = async (
 
     const query: any = {};
 
-    // Search
+   
     if (search) {
 
       query.title = {
@@ -68,7 +64,7 @@ export const getAllBooks = async (
 
     }
 
-    // Filter
+   
     if (category) {
 
       query.category = category;
@@ -79,7 +75,7 @@ export const getAllBooks = async (
   query.author = author;
 }
 
-    // Sorting
+    
     let sortOption = {};
 
     if (sort === "price_asc") {
@@ -148,9 +144,7 @@ export const getAllBooks = async (
 };
  
 
-// =======================
-// Get Single Book
-// =======================
+
 export const getSingleBook = async (
   req: Request,
   res: Response
@@ -213,9 +207,7 @@ export const getMyBooks = async (
   }
 };
 
-// =======================
-// Delete Book
-// =======================
+
 export const deleteBook = async (
   req: Request,
   res: Response

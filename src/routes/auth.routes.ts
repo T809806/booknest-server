@@ -4,11 +4,11 @@ import verifyToken from "../middleware/verifyToken";
 
 const router = Router();
 
-// Public Routes
+
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-// Protected Route
+
 router.get("/profile", verifyToken, (req, res) => {
   res.json({
     success: true,

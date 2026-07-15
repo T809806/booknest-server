@@ -10,10 +10,10 @@ export const registerUser = async (
   res: Response
 ) => {
   try {
-    // 1. Get Data From Request Body
+    
     const { name, email, password, photoURL } = req.body;
 
-    // 2. Validation
+    
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
@@ -21,7 +21,7 @@ export const registerUser = async (
       });
     }
 
-    // 3. Check Existing User
+    
     const existingUser = await usersCollection.findOne({ email });
 
     if (existingUser) {
@@ -31,10 +31,10 @@ export const registerUser = async (
       });
     }
 
-    // 4. Hash Password
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 5. Create User Object
+   
     const newUser: User = {
       name,
       email,
@@ -43,10 +43,10 @@ export const registerUser = async (
       createdAt: new Date(),
     };
 
-    // 6. Save User
+  
     const result = await usersCollection.insertOne(newUser);
 
-    // 7. Success Response
+   
     return res.status(201).json({
       success: true,
       message: "Registration successful.",
@@ -68,10 +68,10 @@ export const loginUser = async (
   res: Response
 ) => {
   try {
-    // 1. Get Data
+    
     const { email, password } = req.body;
 
-    // 2. Validation
+   
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -79,7 +79,7 @@ export const loginUser = async (
       });
     }
 
-    // 3. Find User
+   
     const user = await usersCollection.findOne({ email });
 
     if (!user) {
@@ -89,7 +89,7 @@ export const loginUser = async (
       });
     }
 
-    // 4. Compare Password
+  
     const isPasswordMatched = await bcrypt.compare(
       password,
       user.password
@@ -102,7 +102,7 @@ export const loginUser = async (
       });
     }
 
-    // 5. Generate JWT
+   
     const token = jwt.sign(
       {
         email: user.email,
@@ -113,7 +113,7 @@ export const loginUser = async (
       }
     );
 
-    // 6. Success Response
+    
     return res.status(200).json({
       success: true,
       message: "Login successful.",
